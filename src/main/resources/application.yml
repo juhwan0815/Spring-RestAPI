@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  freemarker: # resources/templates/ 에서 ftl 파일 찾게 하기 위한 설정
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties.hibernate.hbm2ddl.auto: update # DB 스키마 알아서 변경
+    show-sql: true # jpa 쿼리를 conosole 로그로 출력
+  messages:
+    basename: i18n/exception
+    encoding: UTF-8
+  jwt:
+    secret: govlepel@$&
+  social:
+    kakao:
+      client_id: 9a9a02eedbe752442e4a7550ec217f88
+      redirect: /social/login/kakao
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+  url:
+    base: http://localhost:8080
