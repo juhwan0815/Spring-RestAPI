@@ -1,8 +1,7 @@
 package com.example.spring.advice;
 
-import com.example.spring.advice.exception.AuthenticationEntryPointException;
-import com.example.spring.advice.exception.EmailSigninFailedException;
-import com.example.spring.advice.exception.UserNotFoundException;
+import com.example.spring.advice.exception.*;
+import com.example.spring.entity.User;
 import com.example.spring.model.response.CommonResult;
 import com.example.spring.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -52,8 +51,21 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public CommonResult AccessDeniedException(HttpServletRequest request,AccessDeniedException e){
         return responseService.getFailResult(Integer.valueOf(getMessage("accessDenied.code")),getMessage("accessDenied.msg"));
+    }
+
+    @ExceptionHandler(CommunicationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public CommonResult communicationException(HttpServletRequest request, CommunicationException e){
+        return responseService.getFailResult(Integer.valueOf(getMessage("communicationError.code")),getMessage("communicationError.msg"));
+    }
+
+    @ExceptionHandler(UserExistException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public CommonResult communicationException(HttpServletRequest request, UserExistException e){
+        return responseService.getFailResult(Integer.valueOf(getMessage("existingUser.code")),getMessage("existingUser.msg"));
     }
 
     // code정보에 해당하는 메시지를 조회합니다.

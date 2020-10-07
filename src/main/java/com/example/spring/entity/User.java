@@ -26,15 +26,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK생성 전략의 DB에 위임 mysql-> pk필드 auto_increment
     private Long id;
 
-    @Column(nullable = false,unique = true,length = 30)
+    @Column(nullable = false,unique = true,length = 50)
     private String uid;
 
     @Column(nullable = false,length = 100)
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Json 결과로 출력 안할 데이터선언
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String password;
+
+    @Column(length = 100)
+    private String provider;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
