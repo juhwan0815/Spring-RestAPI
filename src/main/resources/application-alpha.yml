@@ -1,0 +1,27 @@
+logging:
+  level:
+    root: warn
+    com.example.spring: info
+  file:
+    path: C:\Users\juwom\log
+    max-history: 7
+
+spring:
+  proflles: alpha
+  freemarker: # resources/templates/ 에서 ftl 파일 찾게 하기 위한 설정
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring?useSSL=false&useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties.hibernate:
+      hbm2ddl.auto: update # DB 스키마 알아서 변경
+      format_sql: true
+    show-sql: true
+    generate-ddl: false
+  url:
+    base: http://localhost:8080
