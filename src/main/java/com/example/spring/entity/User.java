@@ -1,5 +1,6 @@
 package com.example.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,8 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"}) // Post Entity 에게 User와의 관계를 Json으로 변환시 오류 방지를 위한 코드
+public class User extends CommonDataEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK생성 전략의 DB에 위임 mysql-> pk필드 auto_increment

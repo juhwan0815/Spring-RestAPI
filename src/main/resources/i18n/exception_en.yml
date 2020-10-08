@@ -19,6 +19,12 @@ communicationError:
 existingUser:
   code: "-1005"
   msg: "you are an existing member."
+notOwner:
+  code: "-1006"
+  msg: "you are not the owner of this resource."
+resourceNotExist:
+  code: "-1007"
+  msg: "This resource does not exist."
 
 
 

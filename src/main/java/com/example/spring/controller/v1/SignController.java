@@ -36,13 +36,13 @@ public class SignController {
     private final KakaoService kakaoService;
 
     @ApiOperation(value = "로그인",notes = "이메일 회원 로그인을 한다.")
+
     @PostMapping("/signin")
     public SingleResult<String> signin(@ApiParam(value = "회원ID: 이메일",required = true) @RequestParam String id,
                                        @ApiParam(value = "비밀번호",required = true) @RequestParam String password){
         User user = userRepository.findByUid(id).orElseThrow(EmailSigninFailedException::new);
         if(!passwordEncoder.matches(password,user.getPassword()))
             throw new EmailSigninFailedException();
-
         System.out.println("gd");
         return  responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getId()),user.getRoles()));
     }
