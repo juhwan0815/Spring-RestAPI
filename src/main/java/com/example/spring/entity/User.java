@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"}) // Post Entity 에게 User와의 관계를 Json으로 변환시 오류 방지를 위한 코드
+@Proxy(lazy = false) // User 클래스는 다른 class에서 연관관계 매핑을 통해 Lazy 로딩되므로 캐생시 문제가 발생하지 않도록 proxy false 설정을 한다.
 public class User extends CommonDataEntity implements UserDetails {
 
     @Id

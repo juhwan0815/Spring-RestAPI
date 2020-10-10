@@ -1,15 +1,18 @@
 package com.example.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post {
+public class Post extends CommonDataEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,8 @@ public class Post {
     private User user;
 
     // Join 테이블이 Json결과에 표시되지 않도록 처리
-    protected Board getBoard(){
+    @JsonIgnore
+    public Board getBoard(){
         return board;
     }
 

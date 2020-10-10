@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Board extends CommonDataEntity{
+public class Board extends CommonDataEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

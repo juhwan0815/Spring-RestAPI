@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.CacheKeyPrefix;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -34,14 +33,14 @@ public class RedisConfig {
 
         // 캐시키별 default 유효시간을 설정
         Map<String,RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
-        cacheConfigurations.put(CacheKey.USER,RedisCacheConfiguration.defaultCacheConfig())
-                .entryTtl(Duration.ofSeconds(CacheKey.USER_EXPIRE_SEC));
-        cacheConfigurations.put(CacheKey.BOARD,RedisCacheConfiguration.defaultCacheConfig())
-                .entryTtl(Duration.ofSeconds(CacheKey.BOARD_EXPIRE_SEC));
-        cacheConfigurations.put(CacheKey.POST,RedisCacheConfiguration.defaultCacheConfig())
-                .entryTtl(Duration.ofSeconds(CacheKey.POST_EXPIRE_SEC));
-        cacheConfigurations.put(CacheKey.POSTS,RedisCacheConfiguration.defaultCacheConfig())
-                .entryTtl(Duration.ofSeconds(CacheKey.POST_EXPIRE_SEC));
+        cacheConfigurations.put(CacheKey.USER,RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(CacheKey.USER_EXPIRE_SEC)));
+        cacheConfigurations.put(CacheKey.BOARD,RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(CacheKey.BOARD_EXPIRE_SEC)));
+        cacheConfigurations.put(CacheKey.POST,RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(CacheKey.POST_EXPIRE_SEC)));
+        cacheConfigurations.put(CacheKey.POSTS,RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(CacheKey.POST_EXPIRE_SEC)));
 
         return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory).cacheDefaults(configuration)
                 .withInitialCacheConfigurations(cacheConfigurations).build();
